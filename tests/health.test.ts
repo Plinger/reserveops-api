@@ -10,13 +10,14 @@ beforeAll(async () => {
 });
 
 describe("HTTP foundation", () => {
-  it("reports liveness without claiming database readiness", async () => {
+  it("reports preview readiness without a database", async () => {
     const live = await request(app).get("/health");
     expect(live.status).toBe(200);
     expect(live.body.status).toBe("ok");
     expect(live.body.network).toBe("testnet");
     const ready = await request(app).get("/ready");
-    expect(ready.status).toBe(503);
+    expect(ready.status).toBe(200);
+    expect(ready.body.status).toBe("ready");
     expect(ready.body.database).toBe("unconfigured");
   });
   it("returns a structured 404", async () => {

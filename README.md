@@ -20,6 +20,7 @@ Skip the copy if the local environment file already exists.
 
 - [Architecture and project plan](docs/architecture.md)
 - [Development and configuration](docs/development.md)
+- [Deploy the testnet preview](docs/deployment.md)
 - [Live testnet proof](docs/testnet-proof.md)
 - [Proposed contributor backlog](docs/contributor-backlog.md)
 - [Contributor guide](CONTRIBUTING.md)
@@ -27,7 +28,7 @@ Skip the copy if the local environment file already exists.
 
 Run npm run check for the validation pipeline and npm run format:check for formatting.
 Production: npm run build then npm start.
-Liveness: http://localhost:4000/health. Readiness: http://localhost:4000/ready. Without MongoDB configured, development starts but readiness is 503. See [OpenAPI](docs/openapi.yaml).
+Liveness: http://localhost:4000/health. Readiness: http://localhost:4000/ready. The current preview is ready without MongoDB; the readiness response still reports the database as unconfigured. See [OpenAPI](docs/openapi.yaml).
 
 Run `npm run proof:fixture` to create and verify a fresh testnet sponsor fixture. Run `npm run proof:inspect -- G_ADDRESS` to inspect an existing testnet sponsor. These scripts are independent of MongoDB and the HTTP server.
 

@@ -11,6 +11,7 @@ import { registerTestnetPreview } from "./modules/sponsors/testnet-preview.js";
 export function createApp() {
   const app = express();
   app.disable("x-powered-by");
+  if (env.TRUST_PROXY_HOPS > 0) app.set("trust proxy", env.TRUST_PROXY_HOPS);
   app.use(helmet());
   app.use(cors({ origin: env.CORS_ORIGIN }));
   app.use(pinoHttp({ logger }));
@@ -23,7 +24,8 @@ export function createApp() {
   });
   app.get("/ready", (_req, res) => {
     const database = databaseStatus();
-    const ready = database === "connected";
+    // The public testnet preview does not depend on MongoDB.
+    const ready = database !== "disconnected";
     res
       .set("Cache-Control", "no-store")
       .status(ready ? 200 : 503)

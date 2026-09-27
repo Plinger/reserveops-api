@@ -28,13 +28,13 @@ paths:
       summary: MongoDB readiness
       responses:
         "200":
-          description: Database connected
+          description: Preview is ready; database is connected or not configured
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Readiness"
         "503":
-          description: Database unconfigured or disconnected
+          description: A configured database is disconnected
           content:
             application/json:
               schema:

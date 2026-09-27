@@ -4,17 +4,20 @@ Use Node.js 24 and npm. Run npm ci on a clean clone, copy .env.example to .env o
 
 ## Environment
 
-| Variable        | Default               | Purpose                                                |
-| --------------- | --------------------- | ------------------------------------------------------ |
-| NODE_ENV        | development           | Production requires MongoDB                            |
-| HOST            | 127.0.0.1             | Use 0.0.0.0 for containers                             |
-| PORT            | 4000                  | HTTP port                                              |
-| CORS_ORIGIN     | http://localhost:3100 | Browser origin                                         |
-| LOG_LEVEL       | info                  | Pino log level                                         |
-| MONGODB_URI     | unset                 | Local MongoDB or Atlas URI                             |
-| STELLAR_NETWORK | testnet               | Current supported network; preview always uses testnet |
+| Variable         | Default               | Purpose                                                |
+| ---------------- | --------------------- | ------------------------------------------------------ |
+| NODE_ENV         | development           | Runtime mode                                           |
+| HOST             | 127.0.0.1             | Use 0.0.0.0 for containers                             |
+| PORT             | 4000                  | HTTP port                                              |
+| CORS_ORIGIN      | http://localhost:3100 | Browser origin                                         |
+| LOG_LEVEL        | info                  | Pino log level                                         |
+| MONGODB_URI      | unset                 | Local MongoDB or Atlas URI                             |
+| STELLAR_NETWORK  | testnet               | Current supported network; preview always uses testnet |
+| TRUST_PROXY_HOPS | 0                     | Number of trusted reverse-proxy hops for client IPs    |
 
-Set your own MongoDB URI, e.g. mongodb://127.0.0.1:27017/reserveops. An unreachable configured database fails startup. Unconfigured development mode starts but readiness returns 503. Production requires a URI. Never commit .env or reuse production credentials locally.
+The current preview can run without MongoDB in development or production. Without a URI, `/ready` returns 200 with `database: "unconfigured"` because the public preview does not use the database. If a URI is configured, startup requires a successful connection; a disconnected configured database makes readiness return 503. Set your own URI, e.g. mongodb://127.0.0.1:27017/reserveops, when database features are added. Never commit .env or reuse production credentials locally.
+
+Leave `TRUST_PROXY_HOPS=0` for direct local connections. Set it to `1` only when the service runs behind a trusted single-hop reverse proxy such as Render, so rate limits use the client IP from the forwarded header.
 
 ## Commands
 
@@ -26,7 +29,7 @@ Set your own MongoDB URI, e.g. mongodb://127.0.0.1:27017/reserveops. An unreacha
 ## HTTP
 
 GET /health returns 200 for process liveness.
-GET /ready returns 200 when MongoDB is connected, otherwise 503.
+GET /ready returns 200 when the preview is available with MongoDB connected or unconfigured, and 503 if a configured database is disconnected.
 GET /v1/testnet/sponsors/{sponsorId}/inventory returns a bounded read-only preview from public testnet Horizon. It works without MongoDB and is limited to 10 requests per minute per client. It is not the future authenticated business scan API.
 Unknown routes return JSON 404; invalid JSON and oversized bodies return structured errors.
 Versioned routes have a process-local rate limit. CORS is not authentication.
