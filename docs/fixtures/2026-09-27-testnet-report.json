@@ -1,0 +1,56 @@
+{
+  "network": "testnet",
+  "sponsor": "GAPFN3NHMNUEENMTGW3H2AH6D5NSBE6BU6SRU4RFOR3XIMK3MHO6LESH",
+  "source": "https://horizon-testnet.stellar.org",
+  "observedAt": "2026-09-27T17:11:06.577Z",
+  "ledgerWindow": {
+    "start": 4901095,
+    "end": 4901095
+  },
+  "baseReserveLedger": 4901095,
+  "baseReserveStroops": "5000000",
+  "pagesRead": 1,
+  "accountsInspected": 2,
+  "truncated": false,
+  "entries": [
+    {
+      "kind": "trustline",
+      "owner": "GD2DEQMQMAEKMIL6XVS5TCOSMO4FHNQVB4ATF7LZNPGOJLRBFKFCYXPD",
+      "asset": "RTEST:GALQVKHDP6VQRFK2Z3YVNNUBW42RJCTAZJWHN4EQG4OTMSXQYG7MXVFG",
+      "reserveUnits": 1,
+      "reserveStroops": "5000000",
+      "reserveXlm": "0.5000000"
+    },
+    {
+      "kind": "account",
+      "owner": "GD524U563EMYCZ4BJ6ONRQETCL6CS3QGX7CIQCOKCJSMMOV4N5L2SYDW",
+      "reserveUnits": 2,
+      "reserveStroops": "10000000",
+      "reserveXlm": "1.0000000"
+    },
+    {
+      "kind": "trustline",
+      "owner": "GD524U563EMYCZ4BJ6ONRQETCL6CS3QGX7CIQCOKCJSMMOV4N5L2SYDW",
+      "asset": "RTEST:GALQVKHDP6VQRFK2Z3YVNNUBW42RJCTAZJWHN4EQG4OTMSXQYG7MXVFG",
+      "reserveUnits": 1,
+      "reserveStroops": "5000000",
+      "reserveXlm": "0.5000000"
+    }
+  ],
+  "summary": {
+    "accountCount": 1,
+    "trustlineCount": 2,
+    "explainedReserveUnits": 4,
+    "totalSponsorReserveUnits": 4,
+    "unaccountedReserveUnits": 0,
+    "explainedStroops": "20000000",
+    "explainedXlm": "2.0000000",
+    "totalSponsorReserveStroops": "20000000",
+    "totalSponsorReserveXlm": "2.0000000",
+    "coverage": "reconciled"
+  },
+  "limitations": [
+    "Horizon pagination spans a moving ledger window; this is not an atomic snapshot.",
+    "Only account and ordinary asset-trustline entries are itemized. Other sponsored types remain in unaccounted reserve units."
+  ]
+}

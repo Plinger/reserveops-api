@@ -1,0 +1,185 @@
+openapi: 3.1.0
+info:
+  title: ReserveOps API
+  version: 0.1.0
+  description: Testnet sponsorship preview. Organization and persistent scan APIs are planned.
+servers:
+  - url: http://localhost:4000
+paths:
+  /health:
+    get:
+      operationId: getHealth
+      summary: Process liveness
+      responses:
+        "200":
+          description: API process is running
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, service, network]
+                properties:
+                  status: { type: string, const: ok }
+                  service: { type: string, const: reserveops-api }
+                  network: { type: string, enum: [testnet, mainnet] }
+  /ready:
+    get:
+      operationId: getReadiness
+      summary: MongoDB readiness
+      responses:
+        "200":
+          description: Database connected
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Readiness"
+        "503":
+          description: Database unconfigured or disconnected
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Readiness"
+  /v1/testnet/sponsors/{sponsorId}/inventory:
+    get:
+      operationId: getTestnetSponsorInventory
+      summary: Read a bounded, live testnet sponsorship preview
+      description: Reads public testnet data directly from Horizon. No MongoDB or authentication is used. At most two account pages are read. A complete business inventory and revocation eligibility are not provided.
+      parameters:
+        - name: sponsorId
+          in: path
+          required: true
+          description: Stellar G-address of the sponsor
+          schema: { type: string }
+      responses:
+        "200":
+          description: Preview report, including coverage and consistency limitations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventoryPreview"
+        "400":
+          description: Invalid Stellar G-address
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+        "404":
+          description: Sponsor account does not exist on testnet
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+        "429":
+          description: Preview request rate limit reached
+        "502":
+          description: Stellar testnet could not be read
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code: { type: string }
+            message: { type: string }
+    SponsoredEntry:
+      type: object
+      required: [kind, owner, reserveUnits, reserveStroops, reserveXlm]
+      properties:
+        kind: { type: string, enum: [account, trustline, signer] }
+        owner: { type: string }
+        asset:
+          { type: string, description: Code and issuer for ordinary trustlines }
+        signerKey: { type: string }
+        signerType: { type: string }
+        reserveUnits: { type: integer }
+        reserveStroops: { type: string, pattern: "^[0-9]+$" }
+        reserveXlm: { type: string }
+    InventorySummary:
+      type: object
+      required:
+        [
+          accountCount,
+          trustlineCount,
+          signerCount,
+          explainedReserveUnits,
+          totalSponsorReserveUnits,
+          unaccountedReserveUnits,
+          explainedStroops,
+          explainedXlm,
+          totalSponsorReserveStroops,
+          totalSponsorReserveXlm,
+          coverage,
+        ]
+      properties:
+        accountCount: { type: integer }
+        trustlineCount: { type: integer }
+        signerCount: { type: integer }
+        explainedReserveUnits: { type: integer }
+        totalSponsorReserveUnits: { type: integer }
+        unaccountedReserveUnits:
+          {
+            type: integer,
+            description: Negative values indicate inconsistent observations,
+          }
+        explainedStroops: { type: string }
+        explainedXlm: { type: string }
+        totalSponsorReserveStroops: { type: string }
+        totalSponsorReserveXlm: { type: string }
+        coverage:
+          {
+            type: string,
+            enum: [reconciled, partial, inconsistent, truncated, moving_ledger],
+          }
+    InventoryPreview:
+      type: object
+      required:
+        [
+          network,
+          sponsor,
+          source,
+          observedAt,
+          ledgerWindow,
+          baseReserveLedger,
+          baseReserveStroops,
+          pagesRead,
+          accountsInspected,
+          truncated,
+          entries,
+          summary,
+          limitations,
+        ]
+      properties:
+        network: { type: string, const: testnet }
+        sponsor: { type: string }
+        source: { type: string, format: uri }
+        observedAt: { type: string, format: date-time }
+        ledgerWindow:
+          type: object
+          required: [start, end]
+          properties:
+            start: { type: integer }
+            end: { type: integer }
+        baseReserveLedger: { type: integer }
+        baseReserveStroops: { type: string }
+        pagesRead: { type: integer }
+        accountsInspected: { type: integer }
+        truncated: { type: boolean }
+        entries:
+          type: array
+          items: { $ref: "#/components/schemas/SponsoredEntry" }
+        summary: { $ref: "#/components/schemas/InventorySummary" }
+        limitations:
+          type: array
+          items: { type: string }
+    Readiness:
+      type: object
+      required: [status, database]
+      properties:
+        status: { type: string, enum: [ready, not_ready] }
+        database:
+          { type: string, enum: [connected, disconnected, unconfigured] }

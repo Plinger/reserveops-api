@@ -1,0 +1,66 @@
+{
+  "network": "testnet",
+  "sponsor": "GAJTATXHDK44KZDJ3345E67GUFYJXRUPVMOMP37JFL7NHCXEOUFQS2AB",
+  "source": "https://horizon-testnet.stellar.org",
+  "observedAt": "2026-09-27T17:16:36.293Z",
+  "ledgerWindow": {
+    "start": 4901161,
+    "end": 4901161
+  },
+  "baseReserveLedger": 4901161,
+  "baseReserveStroops": "5000000",
+  "pagesRead": 1,
+  "accountsInspected": 2,
+  "truncated": false,
+  "entries": [
+    {
+      "kind": "account",
+      "owner": "GBGT4B2O4CHU5LC6RGROMPESY3QWLRR5HTLQCPGAR7YNQO7MP6VODUHO",
+      "reserveUnits": 2,
+      "reserveStroops": "10000000",
+      "reserveXlm": "1.0000000"
+    },
+    {
+      "kind": "trustline",
+      "owner": "GBGT4B2O4CHU5LC6RGROMPESY3QWLRR5HTLQCPGAR7YNQO7MP6VODUHO",
+      "asset": "RTEST:GCR6VRR62DSTRZEOCTTGLL46P4U5B6I2YXZD6ASFKTJXW7KIAAUU57UW",
+      "reserveUnits": 1,
+      "reserveStroops": "5000000",
+      "reserveXlm": "0.5000000"
+    },
+    {
+      "kind": "signer",
+      "owner": "GBGT4B2O4CHU5LC6RGROMPESY3QWLRR5HTLQCPGAR7YNQO7MP6VODUHO",
+      "signerKey": "GCPUPXGPU37HIGSZOEG5IMRCVAIOVQE5S5HORZGFECZN53ZWCW4QI4XF",
+      "signerType": "ed25519_public_key",
+      "reserveUnits": 1,
+      "reserveStroops": "5000000",
+      "reserveXlm": "0.5000000"
+    },
+    {
+      "kind": "trustline",
+      "owner": "GCCLAQZMV4WQHRV575QINRJB7MVR2P6L7RBI3OBHACSJWKNVC22FU4R6",
+      "asset": "RTEST:GCR6VRR62DSTRZEOCTTGLL46P4U5B6I2YXZD6ASFKTJXW7KIAAUU57UW",
+      "reserveUnits": 1,
+      "reserveStroops": "5000000",
+      "reserveXlm": "0.5000000"
+    }
+  ],
+  "summary": {
+    "accountCount": 1,
+    "trustlineCount": 2,
+    "signerCount": 1,
+    "explainedReserveUnits": 5,
+    "totalSponsorReserveUnits": 5,
+    "unaccountedReserveUnits": 0,
+    "explainedStroops": "25000000",
+    "explainedXlm": "2.5000000",
+    "totalSponsorReserveStroops": "25000000",
+    "totalSponsorReserveXlm": "2.5000000",
+    "coverage": "reconciled"
+  },
+  "limitations": [
+    "Horizon pagination spans a moving ledger window; this is not an atomic snapshot.",
+    "Only account, ordinary asset-trustline, and signer entries are itemized. Other sponsored types remain in unaccounted reserve units."
+  ]
+}
