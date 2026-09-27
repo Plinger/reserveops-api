@@ -16,7 +16,7 @@ const schema = z
       .string()
       .regex(/^mongodb(?:\+srv)?:\/\//)
       .optional(),
-    STELLAR_NETWORK: z.enum(["testnet", "mainnet"]).default("testnet"),
+    STELLAR_NETWORK: z.literal("testnet").default("testnet"),
   })
   .superRefine((value, context) => {
     if (value.NODE_ENV === "production" && !value.MONGODB_URI) {

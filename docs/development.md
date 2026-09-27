@@ -4,15 +4,15 @@ Use Node.js 24 and npm. Run npm ci on a clean clone, copy .env.example to .env o
 
 ## Environment
 
-| Variable        | Default               | Purpose                                   |
-| --------------- | --------------------- | ----------------------------------------- |
-| NODE_ENV        | development           | Production requires MongoDB               |
-| HOST            | 127.0.0.1             | Use 0.0.0.0 for containers                |
-| PORT            | 4000                  | HTTP port                                 |
-| CORS_ORIGIN     | http://localhost:3100 | Browser origin                            |
-| LOG_LEVEL       | info                  | Pino log level                            |
-| MONGODB_URI     | unset                 | Local MongoDB or Atlas URI                |
-| STELLAR_NETWORK | testnet               | Intended network; queries not implemented |
+| Variable        | Default               | Purpose                                                |
+| --------------- | --------------------- | ------------------------------------------------------ |
+| NODE_ENV        | development           | Production requires MongoDB                            |
+| HOST            | 127.0.0.1             | Use 0.0.0.0 for containers                             |
+| PORT            | 4000                  | HTTP port                                              |
+| CORS_ORIGIN     | http://localhost:3100 | Browser origin                                         |
+| LOG_LEVEL       | info                  | Pino log level                                         |
+| MONGODB_URI     | unset                 | Local MongoDB or Atlas URI                             |
+| STELLAR_NETWORK | testnet               | Current supported network; preview always uses testnet |
 
 Set your own MongoDB URI, e.g. mongodb://127.0.0.1:27017/reserveops. An unreachable configured database fails startup. Unconfigured development mode starts but readiness returns 503. Production requires a URI. Never commit .env or reuse production credentials locally.
 

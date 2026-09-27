@@ -21,7 +21,7 @@ paths:
                 properties:
                   status: { type: string, const: ok }
                   service: { type: string, const: reserveops-api }
-                  network: { type: string, enum: [testnet, mainnet] }
+                  network: { type: string, const: testnet }
   /ready:
     get:
       operationId: getReadiness

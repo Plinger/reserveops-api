@@ -14,6 +14,7 @@ describe("HTTP foundation", () => {
     const live = await request(app).get("/health");
     expect(live.status).toBe(200);
     expect(live.body.status).toBe("ok");
+    expect(live.body.network).toBe("testnet");
     const ready = await request(app).get("/ready");
     expect(ready.status).toBe(503);
     expect(ready.body.database).toBe("unconfigured");

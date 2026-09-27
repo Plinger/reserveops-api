@@ -21,6 +21,8 @@ A second fixture created a sponsored additional signer alongside the account and
 
 The running API returned HTTP 200 for `GET /v1/testnet/sponsors/GAJTATXHDK44KZDJ3345E67GUFYJXRUPVMOMP37JFL7NHCXEOUFQS2AB/inventory`, with the same five-unit summary. It returned HTTP 400 for an invalid address. This preview is bounded to two account pages and has its own request limit. It reads public testnet data without MongoDB. It does not establish eligibility to revoke sponsorship.
 
+On 2026-09-27 at 18:28 UTC, `npm run proof:inspect -- GAJTATXHDK44KZDJ3345E67GUFYJXRUPVMOMP37JFL7NHCXEOUFQS2AB` still found the four itemized entries and five sponsored reserve units. Horizon advanced from ledger 4,902,023 to 4,902,026 during that inspection, so the result correctly reported `moving_ledger` instead of presenting the observation as an atomic snapshot.
+
 ## Reproduce
 
 Use Node.js 24 and `npm ci` in `reserveops-api`. The fixture creates testnet accounts and submits two testnet transactions. No private key is written to disk.

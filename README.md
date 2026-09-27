@@ -33,4 +33,4 @@ Run `npm run proof:fixture` to create and verify a fresh testnet sponsor fixture
 
 The read-only preview endpoint is `GET /v1/testnet/sponsors/{sponsorId}/inventory`. It uses public Stellar testnet data and does not require MongoDB. Its response includes reserve totals, itemized entries, ledger window, and coverage limitations; see the [OpenAPI contract](docs/openapi.yaml).
 
-To contribute, read [CONTRIBUTING.md](CONTRIBUTING.md) and the [proposed backlog](docs/contributor-backlog.md). Backlog entries are plans until published as GitHub issues.
+To contribute, read [CONTRIBUTING.md](CONTRIBUTING.md) and the [open issues](https://github.com/Plinger/reserveops-api/issues). The [backlog](docs/contributor-backlog.md) also tracks work that has not been opened as an issue yet.

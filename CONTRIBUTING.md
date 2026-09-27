@@ -1,6 +1,6 @@
 # Contributing to ReserveOps API
 
-ReserveOps is an open-source project in preparation. See [the architecture](docs/architecture.md), [the live proof](docs/testnet-proof.md), and [the proposed contributor backlog](docs/contributor-backlog.md) before choosing work.
+ReserveOps is an open-source project with a read-only Stellar testnet preview. See [the architecture](docs/architecture.md), [the live proof](docs/testnet-proof.md), [the open issues](https://github.com/Plinger/reserveops-api/issues), and the [longer-term backlog](docs/contributor-backlog.md) before choosing work.
 
 ## Local setup
 

@@ -1,6 +1,6 @@
 # Proposed contributor backlog
 
-This is a planning backlog, not a list of published GitHub issues or approved Wave tasks. Create each GitHub issue only when its prerequisites exist. Each issue should have acceptance criteria, a fixture or reproducible example, and a review owner. Keep Wave issue selection within the program's current points budget.
+This is a planning backlog. Some entries now have [published API issues](https://github.com/Plinger/reserveops-api/issues) or [published web issues](https://github.com/Plinger/reserveops-web/issues); other entries remain plans. None is an approved Wave task until Drips accepts the repository and the maintainer adds that issue to the program. Create dependent issues only when their prerequisites exist. Each issue should have acceptance criteria, a fixture or reproducible example, and a review owner. Keep Wave issue selection within the program's current points budget.
 
 A02 and A03 have now been completed locally; the live signer fixture and inspector cover them. A14 remains a separate future authenticated scan endpoint. The current public preview is bounded and testnet-only.
 
@@ -43,6 +43,6 @@ W01 through W04 have first-pass implementations in the preview dashboard. They s
 
 ## Wave preparation
 
-Publish a public organization repository, a usable demo, a license, and contribution instructions before applying. The maintainer process requires repository approval before issues can enter a Wave. Start with independently mergeable issues such as A01, A04, A06, A10, A11 and A12; only open their dependent implementation issues when fixtures and review capacity exist. Reserve enough time during each Wave to review and merge work.
+Both repositories are public under Plinger and include licenses, CI, contribution instructions, and scoped issues. The testnet preview is reproducible locally but is not yet hosted. The maintainer process requires repository approval before issues can enter a Wave. Start with independently mergeable work such as A01, A04, A06, A10, A11, and A12; only open dependent implementation issues when fixtures and review capacity exist. Reserve enough time during each Wave to review and merge work.
 
 Sources: [maintainer workflow](https://docs.drips.network/wave/maintainers/participating-in-a-wave/), [points budgets](https://docs.drips.network/wave/maintainers/points-budgets/), [repository application limits](https://docs.drips.network/wave/maintainers/repo-application-limits/).
